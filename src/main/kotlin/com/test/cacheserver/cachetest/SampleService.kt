@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit
 
 @Service
 class SampleService {
-    @ReactorCacheable(name = "test")
+    @ReactorCacheable(key="#num")
     fun simulateNetworkCall(num: Int = 0): Mono<String> {
         return Mono.just("NetworkIo $num counts")
             .doOnNext { println("$it 이 찍혔음") }

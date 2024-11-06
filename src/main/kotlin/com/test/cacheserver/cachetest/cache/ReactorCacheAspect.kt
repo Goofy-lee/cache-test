@@ -6,6 +6,8 @@ import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Pointcut
 import org.aspectj.lang.reflect.MethodSignature
 import org.springframework.core.ResolvableType
+import org.springframework.expression.ExpressionParser
+import org.springframework.expression.spel.standard.SpelExpressionParser
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -16,8 +18,9 @@ import java.lang.reflect.Type
 @Aspect
 @Component
 class ReactorCacheAspect(
-    private val reactiveCacheManager: ReactiveCacheManager
+    private val reactiveCacheManager: ReactiveCacheManager,
 ) {
+    private val parser: ExpressionParser = SpelExpressionParser()
 
     @Pointcut("@annotation(ReactorCacheable)")
     fun pointcut() {
@@ -39,6 +42,7 @@ class ReactorCacheAspect(
 
         val reactorCacheable = method.getAnnotation(ReactorCacheable::class.java)
         val cacheName = reactorCacheable.name
+        val keyExpression = reactorCacheable.key
         val args = joinPoint.args
 
         return if (rawType == Mono::class.java) {
