@@ -24,6 +24,13 @@ dependencies {
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+	// cache
+	implementation("io.projectreactor.addons:reactor-extra:3.3.0.RELEASE")
+	implementation("org.springframework.boot:spring-boot-starter-aop:2.3.0.RELEASE")
+	implementation("org.springframework.boot:spring-boot-starter-cache")
+	implementation("com.github.ben-manes.caffeine:caffeine:3.1.5") // 최신 버전 확인 후 사용
+
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
