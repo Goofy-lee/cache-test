@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class CacheTestApplication
 
 fun main(args: Array<String>) {
-    runApplication<CacheTestApplication>(*args)
+	runApplication<CacheTestApplication>(*args)
 }
